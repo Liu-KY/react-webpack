@@ -1,0 +1,31 @@
+.layout {
+    height: 100%;
+
+    .cexpandbtn {
+        color: #a6adb4;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 20px;
+    }
+
+    .logo {
+        :global(.ant-image) {
+            width: 100%;
+            .logoImg1 {
+                width: 100%;
+                height: 50px;
+                display: block;
+            }
+            .logoImg2 {
+                width: 50px;
+                height: 50px;
+                display: block;
+                border-radius: 50%;
+                margin: 0 auto;
+            }
+        }
+    }
+
+
+}
