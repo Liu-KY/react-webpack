@@ -12,11 +12,13 @@
     .logo {
         :global(.ant-image) {
             width: 100%;
+
             .logoImg1 {
                 width: 100%;
                 height: 50px;
                 display: block;
             }
+
             .logoImg2 {
                 width: 50px;
                 height: 50px;
@@ -26,9 +28,44 @@
             }
         }
     }
-    .CsMenu{
-        :global(a){
-            color:#a6a490
+
+    .CsMenu {
+        :global(a) {
+            color: #a6a490
+        }
+    }
+
+    .clsBreadcrumb {
+        line-height: 64px;
+        margin-left: 20px;
+        cursor: pointer;
+
+        .clsBreadcrumbItem {
+            color: #97a8be;
+
+            :global(a) {
+                color: #97a8be;
+            }
+
+            :global(span) {
+                color: #97a8be;
+            }
+        }
+
+        :global(span) {
+            color: #97a8be;
+
+        }
+    }
+
+    .clsHeaderCol5 {
+        font-size: 20px;
+        color: #5a5e66;
+        text-align: right;
+        padding-right: 20px;
+
+        :global(span) {
+            margin: 0 5px;
         }
     }
 

@@ -50,8 +50,7 @@ function handleMenuList(routingList) {
 export default (props) => {
     const { collapsed } = props
     const [selectedKeys, openKeys]=  useCurrentlySelect()
-    // useCurrentlySelect()
-    // console.log(selectedKeys, openKeys)
+    console.log(selectedKeys, openKeys)
     return (
         <>
             <div className={logo}>

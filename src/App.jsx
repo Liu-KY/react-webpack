@@ -1,7 +1,7 @@
 import Layout from '@/Layout'
-import { HashRouter, Routes, Route,Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { asyncRoutes } from './pages'
-
+import Dashboard from '@/pages/dashboard'
 
 function dynamicRout(routes) {
   let results = []
@@ -32,8 +32,9 @@ function App() {
             {
               dynamicRout(asyncRoutes)
             }
+            <Route index element={<Dashboard />} />
           </Route>
-          <Route path='*' element={<Navigate to='/dashboard' />}/>
+          <Route path='*' element={<Navigate to='/dashboard' />} />
         </Routes>
       </HashRouter>
     </>
