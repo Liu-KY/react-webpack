@@ -1,7 +1,7 @@
 import logo1 from '../assets/logo1.webp'
 import logo2 from '../assets/logo2.png'
 import style from './style.module.scss'
-const { cexpandbtn, logo, logoImg1, logoImg2 } = style
+const { cexpandbtn, logo, logoImg1, logoImg2,CsMenu } = style
 
 import {
     MenuFoldOutlined,
@@ -46,11 +46,12 @@ function handleMenuList(routingList) {
     return result
 }
 
- 
+
 export default (props) => {
     const { collapsed } = props
     const [selectedKeys, openKeys]=  useCurrentlySelect()
-    console.log(selectedKeys, openKeys)
+    // useCurrentlySelect()
+    // console.log(selectedKeys, openKeys)
     return (
         <>
             <div className={logo}>
@@ -62,6 +63,7 @@ export default (props) => {
                 mode="inline"
                 theme="dark"
                 items={handleMenuList(asyncRoutes)}
+                className={CsMenu}
             />
             <Cexpandbtn {...props} />
         </>
