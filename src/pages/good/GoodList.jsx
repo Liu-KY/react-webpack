@@ -1,5 +1,11 @@
+import {DatePicker,Button} from 'antd'
+const { RangePicker } = DatePicker;
 export default () => {
   return (
-    <div>商品列表页</div>
+    <div>
+      <RangePicker />
+
+      <Button type="primary">Primary Button</Button>
+    </div>
   )
 }

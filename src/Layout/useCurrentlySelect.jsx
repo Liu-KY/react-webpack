@@ -7,7 +7,6 @@ export default function useCurrentlySelect() {
     return useMemo(() => {
 
         let resultsOf = [['1001'], []]
-        console.log('------')
         asyncRoutes.forEach(item1 => {
             if (item1.children) {
                 item1.children.forEach(item2 => {

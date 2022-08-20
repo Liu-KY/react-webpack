@@ -1,31 +1,18 @@
 import logo1 from '../assets/logo1.webp'
 import logo2 from '../assets/logo2.png'
 import style from './style.module.scss'
-const { cexpandbtn, logo, logoImg1, logoImg2,CsMenu } = style
+const {  logo, logoImg1, logoImg2,CsMenu } = style
 
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-} from '@ant-design/icons';
+
 import { Menu, Image } from 'antd';
+
 
 import { asyncRoutes } from '@/pages'
 import useCurrentlySelect from './useCurrentlySelect'
 import { NavLink } from 'react-router-dom'
 
 
-const Cexpandbtn = (props) => {
-    const { collapsed, scal } = props
-    return (
-        <div onClick={() => scal()} className={cexpandbtn}>
-            {
-                collapsed
-                    ? <MenuUnfoldOutlined />
-                    : <MenuFoldOutlined />
-            }
-        </div>
-    )
-}
+
 
 function getItem(Routes) {
     if (Routes.hidden) return
@@ -50,7 +37,6 @@ function handleMenuList(routingList) {
 export default (props) => {
     const { collapsed } = props
     const [selectedKeys, openKeys]=  useCurrentlySelect()
-    console.log(selectedKeys, openKeys)
     return (
         <>
             <div className={logo}>
@@ -64,7 +50,6 @@ export default (props) => {
                 items={handleMenuList(asyncRoutes)}
                 className={CsMenu}
             />
-            <Cexpandbtn {...props} />
         </>
     )
 }
