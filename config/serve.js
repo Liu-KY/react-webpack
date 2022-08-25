@@ -10,7 +10,7 @@ module.exports = {
 
   //服务器 端口8080；自动打开
   devServer: {
-    port: 8080,
+    port: 9000,
     open: true,
     client: {
       overlay: {
@@ -18,6 +18,12 @@ module.exports = {
         warnings: false,
       },
     },
+    proxy:{
+      '/api':{
+        target:"http://localhost:9999",
+        changeOrigin:true
+      }
+    }
   },
   module: {
     rules: [

@@ -16,8 +16,10 @@ export default function useCurrentlySelect() {
                 if (item1.path == pathname) resultsOf = [[item1.key + ''], []]
             }
         })
+
         return resultsOf
-    }, [])
+    }, [pathname])
+
 
 }
 

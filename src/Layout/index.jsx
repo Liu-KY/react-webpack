@@ -62,7 +62,9 @@ export default () => {
                             style={{
                                 margin: '24px 16px',
                                 padding: 24,
-                                minHeight: 280,
+                                minWidth: '1300px',
+                                position: 'relative',
+                                // overflow: 'auto'
                             }}
                         >
                             <QfContent />

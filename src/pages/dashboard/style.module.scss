@@ -1,0 +1,8 @@
+.clsSmallChart {
+  height: 400px;
+  margin-top: 20px;
+  :global(.ant-col) {
+    background: white;
+    padding:10px
+  }
+}

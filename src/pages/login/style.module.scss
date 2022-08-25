@@ -1,0 +1,12 @@
+.clsLoginBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background:rgba(0,0,0,.3);
+  .clsLogin {
+    width: 540px;
+  }
+}

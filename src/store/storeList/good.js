@@ -1,10 +1,19 @@
-import immer from 'immer'
+import immer from "immer";
 
-const defaultStore ={
-    goodlist:[],
-    goodid:1111
-}
+const defaultStore = {
+  goodCates: [],
+};
 
-export default (store=defaultStore,actions)=>{
-    return store
-}
+export default (store = defaultStore, { type, payload }) => {
+  return immer(store, (store) => {
+    switch (type) {
+      case "GOOD_CHANGE_CATES":
+        store.goodCates = payload;
+        break;
+      case "GOOD_ADD_CATES":
+        store.goodCates = payload;
+
+      default:
+    }
+  });
+};

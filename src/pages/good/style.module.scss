@@ -1,0 +1,34 @@
+.ClsHead {
+  // height: 50px;
+  background: white;
+  margin-bottom: 20px;
+  line-height: 50px;
+  padding: 10px 0;
+}
+
+.clsformTool{
+    text-align: right;
+    font-size: 18px;
+    vertical-align: middle;
+    line-height: 32px;
+    :global(svg){
+      display:inline-block;
+      margin-left:15px;
+      cursor: pointer;
+    }
+}
+
+
+.clsGoodsDetails {
+  :global(img) {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  :global(div) {
+    margin: 0 auto;
+    width:100px;
+    text-align:center;
+  }
+}

@@ -1,8 +1,8 @@
 import style from './style.module.scss'
-const { clsglobalSettings } = style
+const { clsglobalSettings,qfContent } = style
 
 import { Outlet } from 'react-router-dom'
-import { SettingOutlined, AppstoreTwoTone } from '@ant-design/icons';
+import { SettingOutlined, SlackSquareFilled } from '@ant-design/icons';
 import { Drawer, Row, Col, Dropdown } from 'antd';
 import { useState } from 'react'
 import { ChromePicker } from 'react-color';
@@ -20,19 +20,21 @@ export default () => {
 
         dispatch(ChangeColor(ev))
     }
+
     return (
-        <div>
+        <div style={{height:'100%'}}  className={qfContent}>
             <Outlet />
             <SettingOutlined
                 className={`clsglobalSettings ${clsglobalSettings}`}
                 onClick={() => setVisible(true)}
+                style={{color:'var(--ant-primary-color)' }}
             />
             <Drawer
                 visible={visible}
                 onClose={() => setVisible(false)}
             >
                 <Row>
-                    <Col span={20}>主题色</Col>
+                    <Col span={20} style={{color:'var(--ant-primary-color)'}}>主题色</Col>
                     <Col span={4}>
                         <Dropdown
                             overlay={
@@ -44,13 +46,11 @@ export default () => {
                             placement="topRight"
                             trigger={['click']}
                         >
-                            <AppstoreTwoTone twoToneColor="#eb2f96" style={{ fontSize: '20px' }} />
+                            <SlackSquareFilled  style={{ fontSize: '20px',color:'var(--ant-primary-color)' }} />
                         </Dropdown>
 
                     </Col>
                 </Row>
-
-
 
             </Drawer>
         </div>
