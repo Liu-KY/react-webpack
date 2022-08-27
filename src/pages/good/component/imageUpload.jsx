@@ -35,17 +35,18 @@ const App = ({ value, onChange }) => {
   const { token } = useSelector(store => store.user)
   // console.log(token)
   useEffect(() => {
-    if (value) {
+    if (value && fileList.length == 0) {
       setFileList([
         {
           uid: +new Date(),
           name: 'image.png',
           status: 'done',
-          url: value,
+          url: `http://localhost:9999${value}`,
         },
       ])
+
     }
-  }, [])
+  }, [value])
 
   // {
   //   uid: '-1',
@@ -73,9 +74,7 @@ const App = ({ value, onChange }) => {
     setFileList(fileList)
 
     if (file.status === 'done' && file.response.err === 0) {
-      console.log('上传成功', file.response.data.img)
       // setimgSrc(file.response.data.img)
-
       onChange(file.response.data.img)
     }
   }

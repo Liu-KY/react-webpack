@@ -39,19 +39,18 @@ export default (props) => {
     };
 
     const data = useMemo(() => {
-
         return goodCates.map((item) => {
             if (hidden) {
                 if (!hidden.includes(item.cate_zh)) {
                     return {
                         label: item.cate_zh,
-                        value: item._id,
+                        value: item.cate,
                     }
                 }
             } else {
                 return {
                     label: item.cate_zh,
-                    value: item._id,
+                    value: item.cate,
                 }
             }
         }).filter(item => item !== undefined)
@@ -64,7 +63,7 @@ export default (props) => {
             onChange(value)
         }
        }
-    }, [])
+    }, [value])
 
     return (
         <Select
@@ -99,8 +98,12 @@ export default (props) => {
                 </>
             )}
             options={data}
-            onChange={onChange}
-            defaultValue={value }
+            onChange={(ev)=>{
+                console.log(ev)
+                onChange(ev)
+            }}
+            defaultValue={value}
+            value={value}
         >
             {/* {goodCates.map((item) => (
                 <Option key={item._id} value ={item.cate_zh} >{item.cate_zh}</Option>

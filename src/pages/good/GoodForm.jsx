@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import {
   PageHeader,
   Button,
@@ -11,23 +12,39 @@ import {
 
 import ProductCategory from "./component/productCategory";
 import ImageUpload from './component/imageUpload'
-import { goodUpdate } from '@/api/good'
+import { goodUpdate, goodInfo } from '@/api/good'
 
 export default () => {
   const navigate = useNavigate()
+  const { state } = useLocation()
+  const [form] = Form.useForm()
+
+  useEffect(() => {
+    if (state && state.id) {
+
+      goodInfo({ id: state.id }).then(res => {
+        form.setFieldsValue(res.info)
+
+      })
+    }
+  }, [])
+
   const onFinish = (ev) => {
-    console.log(ev)
+
+    let data = { ...ev }
+    if (state && state.id) data.id = state.id
+
     goodUpdate(ev).then(res => {
-      console.log(res)
+
       if (res) {
-        // message.success(`商品${id ? '编辑' : '上传'}成功`);
-        message.success(`商品上传成功`,3,()=>navigate(-1));
+        message.success(`商品${state && state.id ? '编辑' : '上传'}成功`, () => navigate(-1));
 
       }
     })
   }
-  
-  const [form] = Form.useForm()
+
+
+
 
   return (
     <div>
@@ -45,7 +62,6 @@ export default () => {
           name="register"
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 12 }}
-          scrollToFirstError
           onFinish={onFinish}
           style={{
             background: 'white',

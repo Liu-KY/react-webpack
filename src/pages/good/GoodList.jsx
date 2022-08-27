@@ -5,7 +5,7 @@ const {
   clsGoodsDetails } = style;
 
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect,useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useDebounceEffect } from 'ahooks'
 import {
@@ -14,6 +14,7 @@ import {
   Row,
   Input,
   Button,
+  notification
 } from "antd";
 import {
   ReloadOutlined,
@@ -24,7 +25,7 @@ import moment from 'moment';
 
 
 import ProductCategory from "./component/productCategory";
-import { goodList } from '@/api/good'
+import { goodList, goodDelete } from '@/api/good'
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log("params", pagination, filters, sorter, extra);
@@ -34,6 +35,7 @@ export default () => {
   const navigate = useNavigate()
   const [data, setData] = useState([])
   const [total, settotal] = useState(0)
+  const [count, setCount] = useState(0)
   const { goodCates } = useSelector(store => store.good)
 
 
@@ -52,9 +54,7 @@ export default () => {
     size: 10,
   })
 
-
-  useDebounceEffect(() => {
-
+  const requestData = () => {
     goodList(params).then((res) => {
       if (res) {
         setData(res.list)
@@ -66,14 +66,23 @@ export default () => {
         })
       }
     })
-  }, [params],{wait:1000})
+  }
+
+  useDebounceEffect(() => {
+    requestData()
+  }, [params], { wait: 500, leading: true })
+
+  useEffect(() => {
+    requestData()
+
+  }, [count])
 
   const columns = useMemo(() => {
     return [
       {
         title: "商品名称",
         dataIndex: "name",
-        render: (text, record, index) => {
+        render: (text, record) => {
           return (
             <div className={`clsGoodsDetails ${clsGoodsDetails}`}>
               <img src={`http://localhost:9999${record.img}`} />
@@ -85,9 +94,9 @@ export default () => {
       {
         title: "商品分类",
         dataIndex: "cate",
-        render: (text, record, index) => {
+        render: (text) => {
           if (goodCates.length > 0) {
-            const [r] = goodCates.filter(ele => ele._id === text)
+            const [r] = goodCates.filter(ele => ele.cate === text)
             return (
               <div>
                 {
@@ -96,7 +105,6 @@ export default () => {
               </div>
             )
           }
-
         }
       },
       {
@@ -116,7 +124,7 @@ export default () => {
           compare: (a, b) => a.math - b.math,
           multiple: 2,
         },
-        render: (text, record, index) => {
+        render: (text, record) => {
           return (
             <div>
               {record.hot ? '是' : '否'}
@@ -132,7 +140,7 @@ export default () => {
           compare: (a, b) => a.math - b.math,
           multiple: 2,
         },
-        render: (text, record, index) => {
+        render: (text, record) => {
           return (
             <>
               <div>
@@ -154,11 +162,25 @@ export default () => {
           multiple: 1,
         },
         align: 'center',
-        render: () => {
+        render: (text, record,) => {
           return (
             <div>
-              <Button type='primary' size='small'>编辑</Button>
-              <Button danger size='small' style={{ marginLeft: '10px' }}>删除</Button>
+              <Button type='primary' size='small' onClick={() => {
+                navigate('/good/edit', { state: { id: record._id } })
+
+              }}>编辑</Button>
+              <Button danger size='small' style={{ marginLeft: '10px' }} onClick={() => {
+                goodDelete({ ids: `${record._id};` }).then(res => {
+                  if (res) {
+                    setCount(count=>count+1)
+                    notification.open({
+                      message: '提示',
+                      description:
+                        '商品删除成功',
+                    });
+                  }
+                })
+              }}>删除</Button>
             </div>
           )
         }
@@ -175,7 +197,7 @@ export default () => {
             商品名称:
           </Col>
           <Col span={4}>
-            <Input placeholder="请输入商品名称" value={params.name} onChange={(ev)=>setParams({...params,name:ev.target.value})} />
+            <Input placeholder="请输入商品名称" value={params.name} onChange={(ev) => setParams({ ...params, name: ev.target.value })} />
           </Col>
           <Col span={2} offset={2}>
             商品品类:

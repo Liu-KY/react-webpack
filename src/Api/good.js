@@ -18,7 +18,6 @@ export function goodList(params = {}) {
   });
 }
 
-
 //商品上传
 export function goodUpdate(data = {}) {
   return request({
@@ -28,12 +27,20 @@ export function goodUpdate(data = {}) {
   });
 }
 
-
 //商品详情
 export function goodInfo(params = {}) {
-    return request({
-      url: "/good/info",
-      method: "GET",
-      params,
-    });
-  }
+  return request({
+    url: "/good/info",
+    method: "GET",
+    params,
+  });
+}
+
+//商品删除
+export function goodDelete(data = {}) {
+  return request({
+    url: "/good/delete",
+    method: "POST",
+    data,
+  });
+}
