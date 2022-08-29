@@ -73,6 +73,7 @@ export default () => {
     const routes = useMemo(() => {
         const results = [...constantRoutes]
         results[0].children = accessRoutes
+        console.log(results)
         return results
     }, [accessRoutes])
 
